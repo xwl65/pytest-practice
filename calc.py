@@ -5,8 +5,6 @@ import pytest
 class calculator:
 
     def add(self, a, b):
-        a=input()
-        b=input()
         return a + b
     def div(self, a, b):
         return a / b
@@ -16,7 +14,10 @@ class calculator:
     def multiply(self,a,b):
         return a*b
     def div(self,a,b):
-        if b== 0 :
-            return "非法输入"
+
+
+        if b == 0:
+            raise Exception("非法输入", )
+            # 触发异常后，后面的代码就不会再执行
         else:
-            return a/b
+            return  a/b
