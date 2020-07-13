@@ -1,0 +1,54 @@
+pytest test_calc.py --reruns 5 --reruns-delay 1  #表示对失败的用例进行重新运行5次，每次delay 1ms
+@pytest.mark.flaky(rerurns=5)在插件中进行添加
+pytest.rerunsfailurs是一个插件，用来对付失败重跑的情况
+pytest.assume用来处理断言的机制。使用assume就不能使用assert
+assume用法如下
+  def test_assume(self):
+        pytest.assume(1==2)
+        pytest.assume(1 == 2)
+        pytest.assume(3== 2)
+pytest-ordering 用来指定顺序的
+ordering用法如下
+    @pytest.mark.run(order=2)
+    def test_subtract(self, a, b, result):
+        result = a/b
+        assert result == self.cal.div(a, b)
+    @pytest.mark.run(order=1)
+    @pytest.mark.first这两种写法都是一样的
+    def test_assume(self):
+        print("登录")
+        pytest.assume(1==2)
+        pytest.assume(1 == 2)
+        pytest.assume(3== 2)
+没有添加的，默认放在最后执行
+
+pytest.mark.first 也可以用来表明用例执行排序
+
+pytest-dependency 这个插件用来表明依赖关系的。
+@pytest.mark.dependency(depends=["test_c"])
+
+pytest-xdist性能的插件。
+
+pytest -n 3,3个进程同时开始运行。在执行的时候可能会发生第三方插件的冲突。
+
+pytest -n 3 --alluredir ./result 通过allure收集日志
+
+改写规则，可以通过pytest.ini里面来进行改写。
+改写后的命令操作如下
+markers = add
+          div
+python_files = check_* test_*
+python_classes = Test_* check_*
+python_functions = test_* aaa_*
+
+allure-pytest插件
+
+yaml里面定义数据的方式有好几种
+-
+  -1
+  -2
+- [1,2]
+
+这样都是列表
+norecusedirs=可以用来处理一些需要
+
